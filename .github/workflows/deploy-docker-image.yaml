@@ -31,7 +31,7 @@ jobs:
           if [ -n "$CONTAINER_ID" ]; then
             echo "Stopping container $CONTAINER_NAME..."
             sudo docker stop $CONTAINER_ID
-            sudo docker rm -f hello-world-container
+            sudo docker rm -f $CONTAINER_NAME
           else
             echo "No running container with name $CONTAINER_NAME found."
           fi

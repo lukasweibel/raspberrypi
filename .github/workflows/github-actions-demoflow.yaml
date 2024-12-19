@@ -1,5 +1,5 @@
 name: Deploy to Rapberry Pi
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
 on:
   push:
     branches: [main]
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  FLASK_APP: app.py
+  FLASK_APP: api/app.py
 
 jobs:
   build:

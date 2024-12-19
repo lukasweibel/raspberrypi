@@ -1,0 +1,28 @@
+name: Deploy to Rapberry Pi
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+env:
+  FLASK_APP: api/app.py
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Dockerimage
+        run: |
+          cd flask-docker
+          docker build --tag python-docker .
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: Deploy Dockerimage
+        run: docker run -p 8080:5000 python-docker:latest

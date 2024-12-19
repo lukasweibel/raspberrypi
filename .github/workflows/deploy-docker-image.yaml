@@ -25,4 +25,4 @@ jobs:
     needs: build
     steps:
       - name: Deploy Dockerimage
-        run: docker run -p 8080:5000 python-docker:latest
+        run: sudo docker run -p 8080:5000 python-docker:latest

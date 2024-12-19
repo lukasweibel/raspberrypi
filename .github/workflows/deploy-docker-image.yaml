@@ -35,6 +35,18 @@ jobs:
             echo "No running container with name $CONTAINER_NAME found."
           fi
 
+      - name: Remove Container
+        run: |
+          CONTAINER_ID=$(sudo docker ps -a --filter "name=$CONTAINER_NAME")
+
+          if [ -n "$CONTAINER_ID" ]; then
+            echo "Stopping container $CONTAINER_NAME..."
+            sudo docker stop $CONTAINER_ID
+            sudo docker rm -f hello-world-container
+          else
+            echo "No running container with name $CONTAINER_NAME found."
+          fi
+
       - name: Run Container
         run: sudo docker run -d -p 8080:5000 --name $CONTAINER_NAME python-docker:latest
 

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  FLASK_APP: api/app.py
+  CONTAINER_NAME: "hello-world-container"
 
 jobs:
   build:
@@ -24,5 +24,17 @@ jobs:
     runs-on: self-hosted
     needs: build
     steps:
-      - name: Deploy Dockerimage
-        run: sudo docker run -d -p 8080:5000 python-docker:latest
+      - name: Stop Running Container
+        run: |
+          sudo docker stop $(docker ps -q --filter "name=$CONTAINER_NAME")
+          sudo docker rm $(docker ps -aq --filter "name=$CONTAINER_NAME")
+
+      - name: Run Container
+        run: sudo docker run -d -p 8080:5000 --name $CONTAINER_NAME python-docker:latest
+
+  cleanup:
+    runs-on: self-hosted
+    needs: deploy
+    steps:
+      - name: Remove unused images
+        run: sudo docker images -qa -f 'dangling=true'

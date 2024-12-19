@@ -1,4 +1,4 @@
-name: Deploy to Rapberry Pi
+name: Deploy Dockerimage to Rapberry Pi
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
       - name: Build Dockerimage
         run: |
           cd flask-docker
-          docker build --tag python-docker .
+          sudo docker build --tag python-docker .
 
   deploy:
     runs-on: self-hosted

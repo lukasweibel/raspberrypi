@@ -1,4 +1,4 @@
-name: Deploy to Rapberry Pi
+name: Deploy Gunicorn App to Rapberry Pi
 
 on:
   push:

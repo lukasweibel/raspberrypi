@@ -37,7 +37,7 @@ jobs:
           fi
 
       - name: Run Container
-        run: sudo docker run -d -p 8080:5000 --name $CONTAINER_NAME python-docker:latest
+        run: sudo docker run -d -p 80:5000 --name $CONTAINER_NAME python-docker:latest
 
   cleanup:
     runs-on: self-hosted
